@@ -2,12 +2,13 @@
 We (Josiah and Cameron) had a joint meeting with partner and the other team (team 27) working on this project.  
 
 # Division of Work
+Partner said it was up to us (the two teams) to decided division of labour.   
 The other team didn't want to decide the division, but we assumed that they don't want to collaborate. 
 Further, we decided that we don't want to collaborate as well.  
 
 # Expectations
-- After the semester is over: I hope to be able to publish an alpha and test with users
-- Prefer a more robust and usable MVP than something that's incomplete with a lot of wishlist items.
+- After the semester is over: Partner hopes to be able to publish an alpha and test with users
+- Partner prefers a more robust and usable MVP than something that's incomplete with a lot of wishlist items.
 
 ## Wishlist Items
 - Web-based platform that connects to the mobile versions 
