@@ -1,5 +1,5 @@
 # Partner Meeting 1: Mon 2022-09-26 4:00 PM - 5:00 PM
-We (Josiah and Cameron) we had a joint meeting with partner and the other team (team 27) working on this project.  
+We (Josiah and Cameron) had a joint meeting with partner and the other team (team 27) working on this project.  
 
 # Division of Work
 The other team didn't want to decide the division, but we assumed that they don't want to collaborate. 
