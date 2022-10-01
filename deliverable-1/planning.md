@@ -2,13 +2,10 @@
 ## Product Details
  
 #### Q1: What are you planning to build?
+A cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water.  
+Frequently, people lose items near, or in, bodies of water. This product seeks to provide an avenue for these people to be reunited with their lost items, and incentivize others to help find the lost items.  
+Users will be able to make posts about items they have lost, including details about the item, where it was lost, contact info, and an optional bounty for finding the item. Users will also be able to make posts about items they have found, including their contact info and item description, so that the item's owner can reclaim the item, and optionally provide a reward.  
 
-A cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water. 
-
-Frequently, people lose items near, or in, bodies of water. This product seeks to provide an avenue for these people to be reunited with their lost items, and incentivize others to help find the lost items.
-Users will be able to make posts about items they have lost, including details about the item, where it was lost, contact info, and an optional bounty for finding the item.
-
-Users will also be able to make posts about items they have found, including their contact info and item description, so that the item's owner can reclaim the item, and optionally provide a reward.
 --------
 #### Q2: Who are your target users?
 - A fisherman who has lost items near bodies of water and wants to recover them.
@@ -33,7 +30,8 @@ Users of our platform will be able to save time browsing competing platforms for
 
 Further, our platform attracts a community of item finders, who may otherwise not be incentivized to search for lost items, to spend more time searching for items and tracking down their owners. 
 
-We hope that this increase in efficiency will lead to less lost items cluttering our bodies of water, less consumer waste due to lost items, and more happy people, reunited with their lost treasures!
+We hope that this increase in efficiency will lead to less lost items cluttering our bodies of water, less consumer waste due to lost items, and more happy people, reunited with their lost treasures!  
+
 --------
 #### Q4: How will you build it?
 
