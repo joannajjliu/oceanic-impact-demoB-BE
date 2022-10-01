@@ -1,69 +1,65 @@
-# YOUR PRODUCT/TEAM NAME
-> _Note:_ This document is meant to evolve throughout the planning phase of your project.   That is, it makes sense for you commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section). Most importantly, it is a reflection of all the planning you work you've done in the first iteration. 
- > **This document will serve as a master plan between your team, your partner and your TA.**
-
+# Oceanic Impact | Smart Solutions Inc.
 ## Product Details
  
 #### Q1: What are you planning to build?
 
- > Short (1 - 2 min' read)
- * Start with a single sentence, high-level description of the product.
- * Be clear - Describe the problem you are solving in simple terms.
- * Be concrete. For example:
-    * What are you planning to build? Is it a website, mobile app,
-   browser extension, command-line app, etc.?      
-    * When describing the problem/need, give concrete examples of common use cases.
-    * Assume your the reader knows nothing about the problem domain and provide the necessary context. 
- * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
-   For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
- * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
+A cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water. 
 
+Frequently, people lose items near, or in, bodies of water. This product seeks to provide an avenue for these people to be reunited with their lost items, and incentivize others to help find the lost items.
+Users will be able to make posts about items they have lost, including details about the item, where it was lost, contact info, and an optional bounty for finding the item.
 
+Users will also be able to make posts about items they have found, including their contact info and item description, so that the item's owner can reclaim the item, and optionally provide a reward.
+--------
 #### Q2: Who are your target users?
+- A fisherman who has lost items near bodies of water and wants to recover them.
+- A surfer who has lost items near bodies of water and wants to recover them.
+- A magnet fisher who would like to make a profit by selling items they found near or in water.
+- A person who searches the beach for items and wants to profit off the items they found.
+- A person whose job is to keep an area such a beach or lake clean, who can profit off the items they find while doing their job.
 
-  > Short (1 - 2 min' read max)
- * Be specific (e.g. a 'a third-year university student studying Computer Science' and not 'a student')
- * **Feel free to use personas. You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).**
+Example personas:
 
+1. Chad, 52, is an environmentalist and magnet fisher in Canada. He consistently finds lost items which he deems worthless in a typical marketplace. In these situations, his ideal course of action is to scrap or trash such items.
+
+1. Cindy, 20, lives by a beach and regularly walks near and swims in the water. Occasionally, she would lose items, but because she does not possess the right tools to find such items in a large beach, she would deem such items unrecoverable.
+--------
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
-> Short (1 - 2 min' read max)
- * We want you to "connect the dots" for us - Why does your product (as described in your answer to Q1) fits the needs of your users (as described in your answer to Q2)?
- * Explain the benefits of your product explicitly & clearly. For example:
-    * Save users time (how much?)
-    * Allow users to discover new information (which information? And, why couldn't they discover it before?)
-    * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
-    * Does this application exist in another form? If so, how does your differ and provide value to the users?
-    * How does this align with your partner's organization's values/mission/mandate?
+Today, there exist few apps that allow users to post about their lost items. Websites like Kijiji, craigslist, Nextdoor, and Facebook allow this functionality, but these platforms have problems. Firstly, listings on these platforms are unlikely to be seen by those that find lost items, due to the clutter of other listings made for other purposes. Further, these listings generally lack the accurate geo-location information required to help associate a lost item with its rightful owner. 
 
+Our product fixes these shortcomings of general community classifieds by providing a more purposeful and descriptive platform. Users are better able to match a lost item with its owner, and owners are afforded more specific tooling such as accurate geolocation. Furthermore, our app helps to properly incentivize regular beach-goers, amateur scuba divers, and magnet-fishing hobbyists to seek out these lost items and reunite them with their owners.
+
+Users of our platform will be able to save time browsing competing platforms for their lost items, and instead see more filtered results about lost items, reducing the need to consider every listing, instead only seeing listings geographically close to their lost item(s).
+
+Further, our platform attracts a community of item finders, who may otherwise not be incentivized to search for lost items, to spend more time searching for items and tracking down their owners. 
+
+We hope that this increase in efficiency will lead to less lost items cluttering our bodies of water, less consumer waste due to lost items, and more happy people, reunited with their lost treasures!
+--------
 #### Q4: How will you build it?
 
-> Short (1-2 min' read max)
- * What is the technology stack? Specify any and all languages, frameworks, libraries, PaaS products or tools. 
- * How will you deploy the application?
- * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
- * Will you be using third party applications or APIs? If so, what are they?
- * What is your testing strategy?
-
+- The frontend of the app will be built using react native to enable compatibility with iOS and Android devices, as well as any future web deployments.
+- MongoDB will be used for the backend database; using the mongo atlas free tier
+- Deployment for the back-end server will be local until we discuss a publicly-hosted alternative and pricing.
+- Back-end server will use Node/ExpressJS using TypeScript as the language.
+- OpenStreetMap API will be used for the map functionalities. 
+- Backend testing will be done using Mocha/Chai. 
+- Front-end testing will be done manually, by each front-end reviewer, for each feature/code-review.
+-------
 #### Q5: What are the user stories that make up the MVP?
 
- * At least 5 user stories concerning the main features of the application - note that this can broken down further
- * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
- * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
- * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
+| User Story                                                                                                                                                                                     | Acceptance Criteria                                                                                                                                              |   |   |   |   |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|---|---|---|
+| As a person who has found lost items, I want to be able to make a found-item post with information regarding the item(s), in order to sell or return them.                                     | Any user should be able to make found-item posts, each post must include at least a description (image or text), and the finder's contact information            |   |   |   |   |
+| As a person who regularly retrieves garbage and lost items near or in water, I want to be able to check the app's posts pertaining to a specific location in order to sell or return my finds. | Given a location near bodies of water, any user can see a list of posts with description of lost items and ways to contact the owner                             |   |   |   |   |
+| As a person who has lost something near water, I want to see a list of finds from that location in order to retrieve my item.                                                                  | Given a location near bodies of water, any user can see a list of posts with description of found items and ways to retrive the item                             |   |   |   |   |
+| As a person who has lost something near water and seen a post about it on the app, I want to be able to get in contact with the person who found it in order to retrieve my item.              | Each post must include at least one way where finders and owners can get in touch with each other                                                                |   |   |   |   |
+| As a person who has lost something near water, I want to be able to make a lost-item post, so people who have found the item can return it to me.                                              | Any user should be able to make lost-item posts, each post must include at least a description (image or text), a location, and the poster's contact information |   |   |   |   |
 
+https://docs.google.com/spreadsheets/d/1gUiWG6nX8LubjlFXbARQl7m-hTnmnqAZQbSq9eC1Bkk/edit#gid=0
 ----
 ## Intellectual Property Confidentiality Agreement 
-> Note this section is **not marked** but must be completed briefly if you have a partner. If you have any questions, please ask on Piazza.
->  
-**By default, you own any work that you do as part of your coursework.** However, some partners may want you to keep the project confidential after the course is complete. As part of your first deliverable, you should discuss and agree upon an option with your partner. Examples include:
-1. You can share the software and the code freely with anyone with or without a license, regardless of domain, for any use.
-2. You can upload the code to GitHub or other similar publicly available domains.
-3. You will only share the code under an open-source license with the partner but agree to not distribute it in any way to any other entity or individual. 
-4. You will share the code under an open-source license and distribute it as you wish but only the partner can access the system deployed during the course.
-5. You will only reference the work you did in your resume, interviews, etc. You agree to not share the code or software in any capacity with anyone unless your partner has agreed to it.
 
-**Briefly describe which option you have agreed to. Your partner cannot ask you to sign any legally binding agreements or documents pertaining to non-disclosure, confidentiality, IP ownership, etc.**
+We have agreed to number 5 i.e. we will not publish any code publicly. 
 
 ----
 
@@ -71,60 +67,95 @@
 
 #### Q6: What are the roles & responsibilities on the team?
 
-Describe the different roles on the team and the responsibilities associated with each role. 
- * Roles should reflect the structure of your team and be appropriate for your project. Not necessarily one role to one team member.  
- * Add role(s) to your Team-[Team_Number]-[Team_Name].csv file on the main folder
+Josiah Friesen: Frontend, team representative for partner meetings, prototype / UX design.  
+  - Strengths: Android development, UX design/methodologies, agile development
+  - Weaknesses: Backend, QA, Flutter/React Native
 
-List each team member and:
- * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * 3 technical strengths and weaknesses each (e.g. languages, frameworks, libraries, development methodologies, etc.)
+Cameron Fairchild: Back-end co-lead, Team Lead, team representative for partner meetings, API-implementation, devops/CI, QA  
+   - Strengths: NodeJS/Express back-end, MongoDB,docker
+   - Weaknesses: Front-end design, Flutter/React Native, API-design    
 
+Aryan Gandhi: Back-end, Team Lead, Scrum Master, QA  
+   - Strengths: QA testing, Javascript, React Web
+   - Weaknesses: Databases, Flutter/React Native, UX Design
 
-#### Q7: What operational events will you have as a team?
+Ellie Zhang: Back-end  
+   - Strengths: PostgreSQL, APIs
+   - Weaknesses: Flutter/React Native, JavaScript, 
 
-Describe meetings (and other events) you are planning to have. 
- * When and where? Recurring or ad hoc? In-person or online?
- * What's the purpose of each meeting?
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
- * You should have at least 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
-   * What did you discuss during the meetings?
-   * What were the outcomes of each meeting?
-   * You must keep track of meeting minutes and add them to your repo.
-   * You must have a regular meeting schedule established by the second meeting.  
-  
+Kelvin Jiang: Front-end, UX and prototyping  
+   - Strengths: UX design/methodologies, SQL databases, APIs
+   - Weaknesses: QA, NodeJS/Express back-end, Flutter/React Native
+
+Pushti Gandhi: Back-end, QA  
+   - Strengths: SQL databases, APIs, JavaScript, QA testing
+   - Weaknesses: Flutter/React Native
+
+-----
+
+#### Q7: What operational events will you have as a team? 
+Weekly All-hands Meeting: Saturday (1-2pm) - Discord/Microsoft Teams
+    Sync meeting
+    Discuss team progress, partner communications and project decisions.
+Weekly Front-end Meeting:
+    Discuss blockers, progress, team decisions, coordinate scheduling/collaboration
+Weekly Back-end Meeting:
+    Discuss blockers, progress, team decisions, coordinate scheduling/collaboration
+
+-  Meeting 1: Joint meeting with other team  
+
+   - Discussed work division between project teams: undecided by other team
+     - Assumed we will work on different versions of the project
+   - Discussed expectations with partner: 
+      - Client wants a robust and usable MVP
+      - Client wants to be able to test the app with some users after the semester is over
+      - Received wishlist (beyond expectations) items via email
+   - Discussed licensing:
+      - Won’t be open-source     i.e. code is not public
+
+See further minutes in the [minutes document](../meeting-minutes/Meeting1.md)
+
+----
 #### Q8: What artifacts will you use to self-organize?
 
-List/describe the artifacts you will produce in order to organize your team.       
+Artifacts: 
+- Jira will be used to track tasks and organize what has been completed and what still needs to get done
+- Tasks will be prioritized by Jira based on number of dependencies of other application components
+- Tasks will be assigned based on the capabilities, strengths and interests of members
+- The status of work will be tracked using Jira and will be determined by completion requirements of each task
+- Microsoft Teams will be used to organize and schedule meetings
+- Specific team meeting date and times will be decided based on availabilities
+- Team meetings will be approximately 60-90 minutes, weekly
 
- * Artifacts can be To-Do lists, Task boards, schedule(s), meeting minutes, etc.
- * We want to understand:
-   * How do you keep track of what needs to get done?
-   * **How do you prioritize tasks?**
-   * How do tasks get assigned to team members?
-   * How do you determine the status of work from inception to completion?
-
+-----
 #### Q9: What are the rules regarding how your team works?
 
-Describe your team's working culture.
+Team will meet collectively twice a meet - once in lecture and once on Saturdays for a discord call. Front-end and back-end teams will meet separately once a week again on discord.
+Everyone will attend three meetings a week. 
 
-**Communications:**
- * What is the expected frequency? What methods/channels are appropriate? 
- * If you have a partner project, what is your process (in detail) for communicating with your partner?
- 
-**Meetings:**
- * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
+The process for communicating with our partner is to first contact through emails. The emails will be between the partner and team leads but the rest of the group is CC’ed on emails. We expect to have some meetings on zoom calls. For this, the team representatives will get in contact with our partner at least two days prior to when we hope to have the meeting. 
+Only these team representatives will attend the zoom meeting with our partner and the rest of the team will be informed about what was discussed and decided in the following group meeting or, for more time-sensitive information, a message will be sent in our team’s discord server. 
+
+As a team, we are establishing a set of guidelines for communicating availability and progress made. If an individual cannot attend a meeting, we expect to receive a notification in the server letting us know. The people in the meeting will take minutes and anyone who is not present is expected to review those minutes and be informed before the next meeting. 
+In our scrum, each person will share what task they are currently working on, what of that task is completed, what is remaining, and any confusion or blockages they are experiencing around the task. As a team, we will resolve any confusion or delegate assistance as needed to get the task completed. Anyone who cannot attend scrum must send a message in the discord server with these details.
+
+Violations of these guidelines will be tracked by the team and will be reflected in the final evaluations. 
 
 
 ----
 ## Highlights
 
-Specify 3 - 5 key decisions and/or insights that came up during your meetings
-and/or collaborative process.
-
- * Short (5 min' read max)
- * Decisions can be related to the product and/or the team process.
-    * Mention which alternatives you were considering.
-    * Present the arguments for each alternative.
-    * Explain why the option you decided on makes the most sense for your team/product/users.
- * Essentially, we want to understand how (and why) you ended up with your current product and process plan.
- * This section is useful for important information regarding your decision making process that may not necessarily fit in other sections. 
+1. Decided the tech stack (framework, database, etc.)  
+   - React Native will be used to create the front-end because some of the team members already have experience with React web. So it should be easier to learn to work with React Native rather than other frameworks. It is also cross-platform so the code can be used for iOS and android
+      - An alternative we were considering is Flutter because it is cross platform as well and has good performance compared to React Native. However, none of the members have any experience with Flutter or Dart (language) so because of this it may be harder to learn for the most part compared to React Native.
+   - MongoDB will be used as our database because some members already have experience with it and it is easy to modify tables.
+      - An alternative we were considering is PostgreSQL because some of our members have experience with it and many of our members are experienced with SQL. However, we chose MongoDB because it could provide some flexibility with prototyping since it is easier to modify models.
+   - Node/ExpressJS will be used for the backend server as some members have experience with it already. Further, express is a very popular framework with lots of libraries and learning resources available.
+      - We also considered Flask and Django as they are Python frameworks and all of the team has Python experience. However, some of our team feels more confident with Express and the JS DB drivers, so it would be easier to integrate into our team.
+   - TypeScript will be used for the backend instead of (plain) JavaScript because it offers typing which makes documentation and development much easier
+1. Decided the team roles based on a front-end/back-end split
+   - The alternative was to have everyone as full-stack, but this would be less-organized than having separate teams. Separate teams also better emulates a structure that would exist in industry.    
+   - The team roles are chosen based on the strengths, weaknesses and interest of each team member to optimize progress in the project development
+   - The front-end/back-end split was decided to create different sub-teams in order to better organize the task assignments and collaboration between members
+1. Decided to how to organize meetings and tasks as well as what tools we will be using to do so
+1. Decided to work independently from the other group working on the project.
