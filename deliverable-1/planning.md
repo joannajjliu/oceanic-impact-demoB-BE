@@ -1,5 +1,6 @@
 # Oceanic Impact | Smart Solutions Inc.
 ## Product Details
+[Link to prototype](./team_12_prototype.pdf)
  
 #### Q1: What are you planning to build?
 A cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water.  
