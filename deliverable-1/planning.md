@@ -105,6 +105,9 @@ Weekly Front-end Meeting:
     Discuss blockers, progress, team decisions, coordinate scheduling/collaboration
 Weekly Back-end Meeting:
     Discuss blockers, progress, team decisions, coordinate scheduling/collaboration
+Weekly partner meeting: Sunday (11am-12pm) - Zoom
+    Sync meeting with partner and two (or more) team representatives
+    Discuss project progress and any needed partner decisions
 
 -  Meeting 1: Joint meeting with other team  
 
