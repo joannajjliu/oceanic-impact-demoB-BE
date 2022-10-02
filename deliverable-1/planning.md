@@ -56,6 +56,9 @@ We hope that this increase in efficiency will lead to less lost items cluttering
 
 https://docs.google.com/spreadsheets/d/1BGfCcy_7Zxxyqk852ZgQe1y1CWJNWo7FHUTHR-BOBNM/edit?usp=sharing  
 
+![image](https://user-images.githubusercontent.com/24501463/193475468-95212cdc-1e0a-4c9f-a2e5-c72d3342aaed.png)
+Screenshot showing Partner acceptance of user stories
+
 ----
 ## Intellectual Property Confidentiality Agreement 
 
