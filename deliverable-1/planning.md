@@ -36,13 +36,22 @@ We hope that this increase in efficiency will lead to less lost items cluttering
 --------
 #### Q4: How will you build it?
 
-- The frontend of the app will be built using react native to enable compatibility with iOS and Android devices, as well as any future web deployments.
-- MongoDB will be used for the backend database; using the mongo atlas free tier
-- Deployment for the back-end server will be local until we discuss a publicly-hosted alternative and pricing.
-- Back-end server will use Node/ExpressJS using TypeScript as the language.
-- OpenStreetMap API will be used for the map functionalities. 
-- Backend testing will be done using Mocha/Chai. 
-- Front-end testing will be done manually, by each front-end reviewer, for each feature/code-review.
+The frontend of the app will be built using react native to enable compatibility with iOS and Android devices, as well as any future web deployments. 
+For the backend, we will use Node/ExpressJS using TypeScript as the langugage. We will connect the back-end with a MongoDB instance, hosted on the free-tier of 
+Mongo Atlas. The development server will be a locally-run server, until we discuess a publicly-hosted alternative with our partner. 
+
+We will be using OpenStreeMap API to fulfill the mapping and geocoding functionalities. 
+This will be both back-end and front-end, as we need a map visualization and the nearby location backend logic.  
+
+We will be testing the backend using both unit and integration tests via the Mocha and Chai libraries.  
+And each back-end pull request will have to pass the CI with these tests before being merged.
+Front-end testing will be done manually, by each front-end reviewer, for each feature/code-review.    
+
+Deployments of the back-end will be automated on our CI and built as docker images, for easy deployment.  
+Deployments of the front-end will be as apk/ipa files for testing on mobile devices.  
+
+We will use Github actions for our CI, to run tests and build docker images, as they provide a good free tier.
+
 -------
 #### Q5: What are the user stories that make up the MVP?
 
