@@ -80,6 +80,8 @@ We have agreed to number 5 i.e. we will not publish any code publicly.
 
 #### Q6: What are the roles & responsibilities on the team?
 
+Everyone/both teams is responsible for their own QA. Meaning everyone is responsible to write their own tests.  
+
 Josiah Friesen: Frontend, team representative for partner meetings, prototype / UX design.  
   - Strengths: Android development, UX design/methodologies, agile development
   - Weaknesses: Backend, QA, Flutter/React Native
@@ -99,6 +101,10 @@ Ellie Zhang: Back-end
 Kelvin Jiang: Front-end, UX and prototyping  
    - Strengths: UX design/methodologies, SQL databases, APIs
    - Weaknesses: QA, NodeJS/Express back-end, Flutter/React Native
+
+Aditya Goyal: Front-end, UX Design
+   - Strengths: React Native development, SQL databases, ExpressJS/NodeJS development 
+   - Weaknesses: Flutter development, API-design, DevOps/CI
 
 Pushti Gandhi: Back-end, QA  
    - Strengths: SQL databases, APIs, JavaScript, QA testing
