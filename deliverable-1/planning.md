@@ -95,8 +95,8 @@ Aryan Gandhi: Back-end, Team Lead, Scrum Master, QA
    - Weaknesses: Databases, Flutter/React Native, UX Design
 
 Ellie Zhang: Back-end  
-   - Strengths: PostgreSQL, APIs
-   - Weaknesses: Flutter/React Native, JavaScript, 
+   - Strengths: PostgreSQL, APIs, UX design
+   - Weaknesses: Flutter/React Native, JavaScript, DevOps
 
 Kelvin Jiang: Front-end, UX and prototyping  
    - Strengths: UX design/methodologies, SQL databases, APIs
