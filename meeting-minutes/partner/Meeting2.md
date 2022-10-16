@@ -1,4 +1,4 @@
-# Partner Meeting 2: Mon 2022-10-09 11:00 AM - 11:30 AM
+# Partner Meeting 2: Sun 2022-10-09 11:00 AM - 11:30 AM
 We (Josiah, Aditya, and Cameron) had a meeting with the partner and their advisor. 
 
 ## Discussion
