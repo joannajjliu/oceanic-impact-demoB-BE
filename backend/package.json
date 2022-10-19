@@ -9,7 +9,7 @@
     "start": "yarn run build && NODE_ENV=production node ./dist/server.js",
     "dev": "NODE_ENV=development nodemon ./src/server.ts",
     "build": "tsc",
-    "test": "mocha"
+    "test": "mocha ./src/test --recursive"
   },
   "mocha": {
     "require": [

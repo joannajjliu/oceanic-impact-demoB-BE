@@ -1,0 +1,8 @@
+# Mocha config file for running tests on the backend
+reporter: JSON
+reporter-option:
+  - 'output=reports/mocha-results.json'
+timeout: 5000
+recursive: true
+extension: [ "ts", "js" ]
+retries: 1
