@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 
-const locationSchema = new mongoose.Schema({
+import { Types, Schema } from 'mongoose';
+
+
+interface ILocation {
+    lattitude: Types.Decimal128;
+    longitude: Types.Decimal128;
+    name: string;
+}
+
+const locationSchema = new Schema<ILocation>({
     lattitude: {
         type: mongoose.Decimal128,
         required: true
@@ -14,9 +23,24 @@ const locationSchema = new mongoose.Schema({
     }
 });
 
-const listingSchema = new mongoose.Schema({
+
+interface IListing {
+    ID: Types.ObjectId;
+    title: string;
+    description: string;
+    location: Location;
+    posterID: Types.ObjectId;
+    type: string;
+    date?: Date;
+    bounty?: Number;
+    tags?: [string];
+    imageURL?: string;
+    resolved: Boolean;
+}
+
+const listingSchema = new Schema<IListing>({
     ID: {
-        type: mongoose.ObjectID, 
+        type: Schema.Types.ObjectId, 
         required: true
     },
     title: {
@@ -32,9 +56,14 @@ const listingSchema = new mongoose.Schema({
         required: true
     }, 
     posterID: {
-        type: mongoose.ObjectID, 
+        type: Schema.Types.ObjectId, 
         required:true
     },
+    type: {
+        type: String,
+        enum: ["LOST", "FOUND"],
+        required: true
+    }, 
     date: {
         type: Date, 
         default: Date.now
@@ -46,10 +75,13 @@ const listingSchema = new mongoose.Schema({
     tags: {
         type: [String]
     }, 
-    imageID: {
-        type: mongoose.ObjectID
+    imageURL: {
+        type: String
+    }, 
+    resolved: {
+        type: Boolean, 
+        default: false
     }
-
 }, {collection:'Listings'});
 
 const Listing = mongoose.model('Listing', listingSchema);
