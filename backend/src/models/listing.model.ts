@@ -4,13 +4,13 @@ import { Types, Schema } from 'mongoose';
 
 
 interface ILocation {
-    lattitude: Types.Decimal128;
+    latitude: Types.Decimal128;
     longitude: Types.Decimal128;
     name: string;
 }
 
 const locationSchema = new Schema<ILocation>({
-    lattitude: {
+    latitude: {
         type: mongoose.Decimal128,
         required: true
     }, 
@@ -25,11 +25,10 @@ const locationSchema = new Schema<ILocation>({
 
 
 interface IListing {
-    ID: Types.ObjectId;
     title: string;
     description: string;
-    location: Location;
-    posterID: Types.ObjectId;
+    location: ILocation;
+    poster: Types.ObjectId;
     type: string;
     date?: Date;
     bounty?: Number;
@@ -39,10 +38,6 @@ interface IListing {
 }
 
 const listingSchema = new Schema<IListing>({
-    ID: {
-        type: Schema.Types.ObjectId, 
-        required: true
-    },
     title: {
         type: String, 
         required: true
@@ -55,8 +50,9 @@ const listingSchema = new Schema<IListing>({
         type: locationSchema,
         required: true
     }, 
-    posterID: {
+    poster: {
         type: Schema.Types.ObjectId, 
+        ref: 'Profile',
         required:true
     },
     type: {
