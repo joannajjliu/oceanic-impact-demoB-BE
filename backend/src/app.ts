@@ -1,8 +1,15 @@
 import express from 'express';
-import indexRouter from './routes/index.route';
+import indexRoute from './routes/index.route';
+export default class App {
+    public app: express.Application;
 
-const app = express();
+    constructor() {
+        this.app = express();
+        this.mountRoutes();
+    }
 
-app.use('/', indexRouter); // Mount the indexRouter to the root path
-
-export default app;
+    private mountRoutes(): void {
+        const indexRoute_ = new indexRoute();
+        this.app.use('/', indexRoute_.router); // Mount the indexRouter to the root path
+    }    
+}

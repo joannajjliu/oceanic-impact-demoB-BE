@@ -2,9 +2,18 @@
 // the base path is /api
 // versioning of the api routes is done here
 import { Router } from 'express'
-import v0Router from './v0/index.route';
-const router = Router();
+import v0Route from './v0/index.route';
+import Route from '@interfaces/route.interface';
 
-router.use('/v0', v0Router); // mount the v0 router to /api/v0
+export default class APIRoute implements Route {
+    public router: Router = Router();
 
-export default router;
+    constructor() {
+        this.initializeRoutes();
+    }
+
+    private initializeRoutes() {  
+        const v0Route_ = new v0Route();  
+        this.router.use('/v0', v0Route_.router); // mount the v0 router to /api/v0
+    }
+}
