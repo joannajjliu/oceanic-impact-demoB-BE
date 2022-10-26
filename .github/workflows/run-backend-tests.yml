@@ -10,6 +10,7 @@ jobs:
     timeout-minutes: 5 # max 5min
     name: yarn install and test
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false # don't run on draft PRs see: https://github.com/orgs/community/discussions/25722 
     steps:
       - uses: actions/checkout@v2     # checkout repo
       - uses: bahmutov/npm-install@v1
