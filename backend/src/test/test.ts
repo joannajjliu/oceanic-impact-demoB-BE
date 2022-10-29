@@ -22,12 +22,18 @@ before(async () => {
     connectDatabase(uri, 'test'); // Connect to the in-memory database
 });
 
+const beforeEachSuite = async () => {
+    await mongoose.connection.db.dropDatabase();
+};
+
 after(async () => {
     await disconnectDatabase();
     await mongod.stop(); // stop the in-memory database
 });
 
-describe('get all users', function() {
+describe('get all users', async function() {
+    await beforeEachSuite();
+
     const app_: App = new App();
     this.timeout(1000);
     // create test user
@@ -49,7 +55,9 @@ describe('get all users', function() {
     });
 });
 
-describe('get logged in user', function() {
+describe('get logged in user', async function() {
+    await beforeEachSuite();
+    
     const app_: App = new App();
     this.timeout(2000);
     // create test user
