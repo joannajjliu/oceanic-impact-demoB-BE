@@ -4,6 +4,9 @@ import passport from 'passport';
 import authStrategy from './passport/authStrategy';
 import session from 'express-session';
 import User from '@models/users.model';
+import MongoStore from 'connect-mongo';
+import mongoose from 'mongoose';
+
 export default class App {
     public app: express.Application;
 
@@ -29,6 +32,10 @@ export default class App {
                 maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
                 secure: process.env.NODE_ENV === 'production', // set { secure: true } in production
             },
+            store: MongoStore.create({ // preserve session data in MongoDB so it persists across server instances/restarts
+                client: mongoose.connection.getClient(),
+                dbName: process.env.MONGO_DB_NAME as string,
+            })
         }))
         this.app.use(passport.initialize());
         this.app.use(passport.session());
