@@ -13,8 +13,9 @@ export default class App {
     constructor() {
         this.app = express();
         
-        this.useMiddleware();
-        this.mountRoutes();
+        this.useMiddleware().then(() => {
+            this.mountRoutes();
+        });
     }
 
     private mountRoutes(): void {
@@ -22,7 +23,7 @@ export default class App {
         this.app.use('/', indexRoute_.router); // Mount the indexRouter to the root path
     }    
 
-    private useMiddleware(): void {
+    private async useMiddleware(): Promise<void> {
         this.app.use(express.json()); // Parse JSON bodies
         this.app.use(session({
             secret: process.env.SESSION_SECRET as string,
@@ -33,7 +34,7 @@ export default class App {
                 secure: process.env.NODE_ENV === 'production', // set { secure: true } in production
             },
             store: MongoStore.create({ // preserve session data in MongoDB so it persists across server instances/restarts
-                client: mongoose.connection.getClient(),
+                client: (await mongoose.connection.asPromise()).getClient(),
                 dbName: process.env.MONGO_DB_NAME as string,
             })
         }))
