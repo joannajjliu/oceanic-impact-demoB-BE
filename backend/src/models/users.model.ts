@@ -7,7 +7,13 @@ import bcrypt from 'bcrypt';
 
 const HASH_ROUNDS = 10; // 10 hash rounds for bcrypt
 
-const userSchema = new Schema({
+export interface IUser {
+    email: string;
+    password: string; // the hash of the password
+    validatePassword(password: string): Promise<boolean>;
+}
+
+const userSchema = new Schema<IUser>({
     email: {
         type: String,
         required: true,
@@ -18,12 +24,6 @@ const userSchema = new Schema({
         required: true,
     }
 });
-
-export interface IUser extends Document {
-    email: string;
-    password: string; // the hash of the password
-    validatePassword(password: string): boolean;
-}
 
 userSchema.pre('save', async function (next) {
     const thisObj = this as IUser;
@@ -44,9 +44,9 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.validatePassword = async function (pass: string) {
-    return bcrypt.compare(pass, this.password);
+    return await bcrypt.compare(pass, this.password);
 };
 
-const User = model<Document & IUser>('User', userSchema);
+const User = model<IUser>('User', userSchema);
 
 export default User;

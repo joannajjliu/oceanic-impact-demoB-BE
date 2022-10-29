@@ -37,6 +37,7 @@
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
       "@interfaces/*": ["interfaces/*"],
+      "@types/*": ["types/*"],
     },                                  /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
@@ -111,6 +112,7 @@
   "include": ["src/**/*.ts", ".env.production"], // Include production .env file
   "exclude": ["node_modules", "src/tests", "dist"], // exclude tests and node_modules
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": ["tsconfig-paths/register"],
+    "files": true
   }
 }

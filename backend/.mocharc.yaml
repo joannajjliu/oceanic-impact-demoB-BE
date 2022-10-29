@@ -1,4 +1,7 @@
 # Mocha config file for running tests on the backend
+require: [
+  "ts-node/register"
+]
 reporter: JSON
 reporter-option:
   - 'output=reports/mocha-results.json'
