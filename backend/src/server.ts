@@ -4,7 +4,7 @@ import App from './app';
 import { connectDatabase } from './db';
 
 dotenv.config({ // If $NODE_ENV is production, then .env.production will be loaded, otherwise will load .env.development
-    path: resolve(__dirname, '../.env', process.env.NODE_ENV === 'production' ? '.production' : '.development')
+    path: resolve(__dirname, `../.env${process.env.NODE_ENV === 'production' ? '.production' : '.development'}`)
 });
 
 const app_ = new App();
