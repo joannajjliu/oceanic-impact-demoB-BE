@@ -9,7 +9,7 @@ export default class AuthController {
       if (err) {
         return next(err);
       }
-      res.redirect("/");
+      res.redirect(process.env.AUTH_FAILURE_REDIRECT || "/login");
     });
   };
 
@@ -26,13 +26,14 @@ export default class AuthController {
         },
         function (err: any) {
           if (err) {
+            console.error(err);
             return next(err);
           }
           return res.redirect(process.env.AUTH_SUCCESS_REDIRECT || "/");
         }
       );
     } catch (error: any) {
-      if (error.name === "MongoError" && error.code === 11000) {
+      if (error.name === "MongoServerError" && error.code === 11000) {
         // duplicate key in index error.
         // See https://www.mongodb.com/docs/manual/core/index-unique/#unique-index-and-missing-field
         return res.status(409).json({
