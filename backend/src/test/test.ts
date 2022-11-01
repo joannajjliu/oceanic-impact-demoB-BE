@@ -16,32 +16,34 @@ import mongoose from "mongoose";
 
 let mongod: MongoMemoryServer;
 
-before(async () => {
+before(async function() {
   mongod = await MongoMemoryServer.create();
   const uri = mongod.getUri();
   connectDatabase(uri, "test"); // Connect to the in-memory database
 });
 
-const beforeEachSuite = async () => {
-    await mongoose.connection.db.dropDatabase();
+const beforeEachSuite = async function() {
+    await mongoose.connection.dropDatabase();
 };
 
-after(async () => {
+after(async function() {
   await disconnectDatabase();
   await mongod.stop(); // stop the in-memory database
 });
 
-describe("get all users", function () {
-  await beforeEachSuite();
-  
-  const app_: App = new App();
+describe("get all users", async function () {
   this.timeout(1000);
-  // create test user
-  const users = mongoose.model<IUser>("User");
-  users.create({
-    name: "test",
-    email: "test@example.com",
-    password: "test",
+  let app_: App;
+
+  before(async function() {
+    await beforeEachSuite();
+    app_ = new App();
+    // create test user
+    const users = mongoose.model<IUser>("User");
+    await users.create({
+      email: "test@example.com",
+      password: "test",
+    });
   });
 
   it("should not return the password", async function () {
@@ -63,18 +65,21 @@ describe("get all users", function () {
   });
 });
 
-describe("get logged in user", function () {
-  await beforeEachSuite();
-  
-  const app_: App = new App();
+describe("get logged in user", async function () {
   this.timeout(2000);
-  // create test user
-  const User = mongoose.model<IUser>("User");
-  const testUser = new User({
-    email: "test@example.com",
-    password: "test",
+  let app_: App;
+
+  before(async function() {
+    await beforeEachSuite();
+    app_ = new App();
+    // create test user
+    const User = mongoose.model<IUser>("User");
+    const testUser = new User({
+      email: "test@example.com",
+      password: "test",
+    });
+    await testUser.save(); // calls the pre-save hook
   });
-  testUser.save(); // calls the pre-save hook
 
   async function loginTestUser(agent: request.SuperAgentTest) {
     await agent.post("/api/v0/auth/login").send({
