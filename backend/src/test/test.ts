@@ -252,7 +252,7 @@ describe("get logged in user", async function () {
 });
 
 describe("create user", function () {
-  this.timeout(1000);
+  this.timeout(2000);
   let app_: App;
 
   beforeEach(async function() {
@@ -307,8 +307,8 @@ describe("create user", function () {
 
     expect(response.status).to.equal(400);
     expect(response.type).to.equal("application/json");
-    expect(response.body).to.have.property("error");
-    expect(response.body.error).to.include("email");
+    expect(response.body).to.have.property("message");
+    expect(response.body.message).to.include("email");
   });
 
   it("should return a 400 if password is missing", async function () {
@@ -318,8 +318,8 @@ describe("create user", function () {
 
     expect(response.status).to.equal(400);
     expect(response.type).to.equal("application/json");
-    expect(response.body).to.have.property("error");
-    expect(response.body.error).to.include("password");
+    expect(response.body).to.have.property("message");
+    expect(response.body.message).to.include("password");
   });
 
   it("should not login before email is verified", async function () {

@@ -20,7 +20,7 @@ export default class AuthController {
     try {
       if (!email || !password) {
         return res.status(400).json({
-          error: "Fields email and password are required",
+          message: "Fields email and password are required",
         });
       }
       const user = await this.authService.signup(email, password);
@@ -49,13 +49,13 @@ export default class AuthController {
         // duplicate key in index error.
         // See https://www.mongodb.com/docs/manual/core/index-unique/#unique-index-and-missing-field
         return res.status(409).json({
-          error: `A user with the email: "${email}" already exists`,
+          message: `A user with the email: "${email}" already exists`,
         });
       }
       // a;; other errors are assumed to be server errors
       console.error(error);
       res.status(500).json({
-        error: "Error creating new user",
+        message: "Error creating new user",
       });
     }
   };
