@@ -1,5 +1,10 @@
 # Marine Way/Smart Solutions Inc - Team 12
 
+## Demo 
+
+https://user-images.githubusercontent.com/82978761/200195862-fdf49f8f-3619-49dc-ae9b-03cfa338de55.mp4
+
+
 ## Description 
 Our app, Marine Way, is a cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water. 
 
