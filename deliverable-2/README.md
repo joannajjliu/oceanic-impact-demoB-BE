@@ -113,6 +113,21 @@ The purpose of this branch is to allow development to continue on `staging` with
 
 On each pull-request into `main` we require **2** reviews from the backend pod, and for the tests to pass on the CI. This *should* guarantee that any code that goes into production has been reviewed by at least **3** (including the author) and any changes don't fail the tests.  
 
+### Frontend Workflow
+We use github issues for Stories. These automatically are assigned a new issue ID by github.  
+
+When creating a new branch for an issue, the name describes the issue being worked on:  `[description]`.
+> For example, either of   
+> `navigation-and-profile` or    
+> `post-creation`  
+> would be acceptable
+
+Our testing is done manually using Expo to emulate a real-world device.
+
+On each pull-request into `main`, we require 2 reviews from the other members of the front-end team. Additionally, a short description of the changes and pictures of new features are added with each pull-request to help reviewers understand where to navigate to look for changes. 
+
+This should ensure that any code that goes into production has been reviewed by at least **3** (including the author) .
+
  ## Licenses  
  The repo has no license.    
  The lack of license means the code is not free. And we plan to keep the code closed-source.  
