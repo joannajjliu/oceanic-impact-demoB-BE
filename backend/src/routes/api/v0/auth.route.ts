@@ -22,5 +22,6 @@ export default class AuthRoute implements Route {
         );
         this.router.post('/', this.authController.signup); // POST /api/v0/auth/
         this.router.post('/logout', this.authController.logout); // POST /api/v0/auth/logout
+        this.router.get('/verify', this.authController.verifyEmail); // GET /api/v0/auth/verify?token=...&email=...
     }
 }

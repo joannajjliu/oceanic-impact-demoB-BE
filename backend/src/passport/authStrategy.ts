@@ -17,6 +17,10 @@ const localStrategy = new LocalStrategy(async function verify(
         } else {
             const isValid = await user.validatePassword(password);
             if (isValid) {
+                if (!user.emailVerificationInfo.isVerified) {
+                    return cb(null, false, { message: "Email is not yet verified." });
+                }
+
                 return cb(null, {
                     _id: user._id,
                     email: user.email,

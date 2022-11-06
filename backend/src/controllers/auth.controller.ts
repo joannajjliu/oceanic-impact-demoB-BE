@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import AuthService from "@services/auth.service";
+import EmailService from "@/services/email.service";
 
 export default class AuthController {
   public authService = new AuthService();
+  public emailService = new EmailService();
 
   public logout = async (req: Request, res: Response, next: NextFunction) => {
     req.logout(function (err) {
@@ -18,20 +20,25 @@ export default class AuthController {
     try {
       const user = await this.authService.signup(email, password);
 
-      // login the user after signup
-      req.login(
-        {
-          _id: user._id.toString(),
+      // send verification email
+      const sentVerificationEmail = await this.authService.requestNewEmailToken(email, this.emailService);
+      if (!sentVerificationEmail) {
+        return res.status(500).json({
+          message: "Error sending verification email for new user",
+          user: {
+            _id: user._id,
+            email: user.email
+          }
+        });
+      }
+
+      return res.status(201).json({
+        user: {
+          _id: user._id,
           email: user.email,
         },
-        function (err: any) {
-          if (err) {
-            console.error(err);
-            return next(err);
-          }
-          return res.redirect(process.env.AUTH_SUCCESS_REDIRECT || "/");
-        }
-      );
+        message: "Signup successful; Please verify your email.",
+      });
     } catch (error: any) {
       if (error.name === "MongoServerError" && error.code === 11000) {
         // duplicate key in index error.
@@ -47,4 +54,28 @@ export default class AuthController {
       });
     }
   };
+
+  public verifyEmail = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, token } = req.query;
+    if (!email || !token) {
+      return res.status(400).json({
+        message: "Missing email or token query parameters",
+      });
+    }
+    try {
+      const result = await this.emailService.verifyEmail(email as string, token as string);
+      if (!result) {
+        return res.status(400).json({
+          message: "Invalid verification token",
+        });
+      }
+
+      return res.status(204).json(); // no content
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error verifying email",
+      });
+    }
+  }
 }

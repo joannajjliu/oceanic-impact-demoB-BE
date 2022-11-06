@@ -2,7 +2,7 @@
 // https://stackoverflow.com/a/62672649
 // for the pre-save hook for password hash
 
-import { Schema, Document, model, CallbackError } from 'mongoose';
+import { Schema, model, CallbackError } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 const HASH_ROUNDS = 10; // 10 hash rounds for bcrypt
@@ -10,6 +10,13 @@ const HASH_ROUNDS = 10; // 10 hash rounds for bcrypt
 export interface IUser {
     email: string;
     password: string; // the hash of the password
+    emailVerificationInfo: {
+        isVerified: boolean;
+        token: {
+            value: string;
+            expiresAt: Date;
+        }
+    }
     validatePassword(password: string): Promise<boolean>;
 }
 
@@ -22,6 +29,23 @@ const userSchema = new Schema<IUser>({
     password: {
         type: String,
         required: true,
+    },
+    emailVerificationInfo: {
+        isVerified: {
+            type: Boolean,
+            required: true,
+            default: false,
+        },
+        token: {
+            expiresAt: {
+                type: Date,
+                required: true,
+            },
+            value: {
+                type: String,
+                required: true,
+            },
+        },
     }
 });
 

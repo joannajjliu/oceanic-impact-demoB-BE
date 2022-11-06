@@ -9,7 +9,8 @@
     "start": "yarn run build && NODE_ENV=production node ./dist/server.js",
     "dev": "NODE_ENV=development nodemon ./src/server.ts",
     "build": "tsc",
-    "test": "mocha ./src/test --recursive"
+    "test": "NODE_ENV=testing mocha ./src/test --recursive",
+    "test:local": "NODE_ENV=testing mocha ./src/test --recursive --reporter spec"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
@@ -18,6 +19,7 @@
     "@types/mocha": "^10.0.0",
     "@types/multer": "^1.4.7",
     "@types/node": "18.8.3",
+    "@types/nodemailer": "^6.4.6",
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "^2.0.12",
     "chai": "^4.3.6",
@@ -39,6 +41,7 @@
     "express-session": "^1.17.3",
     "mongoose": "^6.7.0",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.8.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
   }
