@@ -299,6 +299,29 @@ describe("create user", function () {
     expect(duplicateEmailUser.body.message).to.include("email").and.include("already");
   });
 
+
+  it("should return a 400 if email is missing", async function () {
+    const response = await request(app_.app).post("/api/v0/auth").send({
+      password: "test",
+    });
+
+    expect(response.status).to.equal(400);
+    expect(response.type).to.equal("application/json");
+    expect(response.body).to.have.property("error");
+    expect(response.body.error).to.include("email");
+  });
+
+  it("should return a 400 if password is missing", async function () {
+    const response = await request(app_.app).post("/api/v0/auth").send({
+      email: "test@example.com",
+    });
+
+    expect(response.status).to.equal(400);
+    expect(response.type).to.equal("application/json");
+    expect(response.body).to.have.property("error");
+    expect(response.body.error).to.include("password");
+  });
+
   it("should not login before email is verified", async function () {
     const user = await request(app_.app)
       .post("/api/v0/auth").send({
