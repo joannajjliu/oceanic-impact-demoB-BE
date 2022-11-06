@@ -1,9 +1,13 @@
 import User, {IUser} from "@models/users.model";
+import Profile from "@models/profile.model";
 import { HydratedDocument } from "mongoose";
 import crypto from "crypto";
 import EmailService from "./email.service";
 
 export default class AuthService {
+    public users_model = User;
+    public profile_model = Profile;
+
     private async generateNewToken(): Promise<string> {
         // generate a new token for email verification
         const token = crypto.randomBytes(32).toString("hex"); // generate 32 random bytes
@@ -11,7 +15,7 @@ export default class AuthService {
     }
 
     public async signup(email: string, password: string): Promise<HydratedDocument<IUser>> {
-        const newUser = new User({
+        const newUser = new this.users_model({
             email,
             password,
             emailVerificationInfo: {
@@ -22,7 +26,13 @@ export default class AuthService {
                 },
             },
         });
-        const user = newUser.save(); // calls the pre-save hook
+        const user = await newUser.save(); // calls the pre-save hook
+        
+        // create a profile for the user
+        await this.profile_model.create({
+            user: user._id,
+        });
+        
         return user;
     }
 
@@ -30,7 +40,7 @@ export default class AuthService {
         // requests a new email token for a user
         // returns true if the token was updated, false if there was an error, and null if the user doesn't exist or is already verified
 
-        const user = await User.findOne({ email: email });
+        const user = await this.users_model.findOne({ email: email });
         if (!user) {
             return null;
         } else {

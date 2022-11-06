@@ -12,6 +12,7 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 
 import App from "../app";
 import { IUser } from "@/models/users.model";
+import { IProfile } from "@/models/profile.model";
 import { IImage } from "@/models/image.model";
 import mongoose, { HydratedDocument } from "mongoose";
 
@@ -360,5 +361,74 @@ describe("create user", function () {
 
     expect(login.status).to.equal(302); // redirect on success
     expect(login.header).to.have.property("location", process.env.AUTH_SUCCESS_REDIRECT); // successful login
+  });
+});
+
+describe("profile create on signup", async function () {
+  this.timeout(2000);
+  let app_: App;
+
+  before(async function () {
+    await beforeEachSuite();
+    app_ = new App();
+  });
+
+  it("should be able to get own profile after signup", async function () {
+    // create test user using signup route
+    const agent = request.agent(app_.app);
+    await agent.post("/api/v0/auth").send({
+      email: "test@example.com",
+      password: "test",
+    });
+
+    // verify email with token
+    const verify = await request(app_.app).get("/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"); // all tokens are valid for testing
+    expect(verify.status).to.equal(204); // success
+
+    await agent.post("/api/v0/auth/login").send({
+      username: "test@example.com", // username is the email
+      password: "test",
+    });
+
+    // get own user info
+    const user = await agent.get("/api/v0/users/me");
+
+    expect(user.status).to.equal(200);
+    expect(user.type).to.equal("application/json");
+
+    const profile = await agent.get("/api/v0/profile");
+
+    expect(profile.status).to.equal(200);
+    expect(profile.type).to.equal("application/json");
+    expect(profile.body.profile).to.be.an("object");
+    expect(profile.body.profile).to.have.property("user", user.body.user._id)
+  });
+});
+
+describe("get profile details", async function () {
+  this.timeout(2000);
+  let app_: App;
+
+  let testProfile: mongoose.HydratedDocument<IProfile>;
+
+  before(async function () {
+    await beforeEachSuite();
+    app_ = new App();
+
+    const testUser = await createTestUser();
+
+    // create test profile
+    const Profile = mongoose.model<IProfile>("Profile");
+    testProfile = await Profile.create({
+      user: testUser._id,
+      displayName: "test",
+    });
+  });
+
+  it("should be able to get a profile by its id", async function () {
+    const profile = await request(app_.app).get(`/api/v0/profile/${testProfile._id}`);
+
+    expect(profile.status).to.equal(200);
+    expect(profile.type).to.equal("application/json");
   });
 });

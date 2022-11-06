@@ -6,6 +6,7 @@ import { Router } from "express";
 import usersRoute from "./users.route";
 import authRoute from "./auth.route";
 import imageRoute from "./image.route";
+import profileRoute from "./profile.route";
 export default class v0Route {
   public router: Router = Router();
 
@@ -17,8 +18,10 @@ export default class v0Route {
     const usersRouter_ = new usersRoute();
     const authRouter_ = new authRoute();
     const imageRouter_ = new imageRoute();
+    const profileRouter_ = new profileRoute();
     this.router.use("/users", usersRouter_.router); // mount users router to /api/v0/users
     this.router.use("/auth", authRouter_.router); // mount auth router to /api/v0/auth
-    this.router.use("/image", imageRouter_.router); // mount auth router to /api/v0/image
+    this.router.use("/image", imageRouter_.router); // mount auth router to /api/v0/image 
+    this.router.use("/profile", profileRouter_.router); // mount auth router to /api/v0/profile
   }
 }
