@@ -1,4 +1,5 @@
 # Marine Way/Smart Solutions Inc - Team 12
+[Frontend D2](https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-front-end/releases/tag/D2)
 
 ## Demo 
 
