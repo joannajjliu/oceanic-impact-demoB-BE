@@ -1,0 +1,29 @@
+name: Test with Mocha on new PR to staging or main
+run-name: Testing Backend on new PR
+on: # see here https://github.com/marketplace/actions/test-reporter
+  pull_request:
+    branches: ['main', 'staging'] # only on PRs to main or staging branches
+    paths: ['backend/**'] # only in the backend folder
+
+jobs:
+  build-test:
+    timeout-minutes: 5 # max 5min
+    name: yarn install and test
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false # don't run on draft PRs see: https://github.com/orgs/community/discussions/25722 
+    steps:
+      - uses: actions/checkout@v2     # checkout repo
+      - uses: bahmutov/npm-install@v1
+        with:
+          working-directory: backend
+      - run: |
+          yarn run test
+        working-directory: backend # in the backend folder (where package.json is)
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: Mocha Tests            # Name of the check that appears on the PR
+          path: backend/reports/mocha-results.json # Path to the test report file
+          reporter: mocha-json        # only uses mocha-json reporter 

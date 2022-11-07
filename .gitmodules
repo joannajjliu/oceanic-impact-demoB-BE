@@ -1,0 +1,3 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-front-end

@@ -1,10 +1,45 @@
-# Oceanic Impact | Smart Solutions Inc. App Backend
-This directory contains the backend for the mobile app. This includes the server and docker configuration for server deployment.
+# Marine Way/Smart Solutions Inc - Team 12
+[Frontend D2](https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-front-end/releases/tag/D2)
 
-## Version
-v0.0.1
+## Demo 
 
-## Develop Requirements
+https://user-images.githubusercontent.com/82978761/200195862-fdf49f8f-3619-49dc-ae9b-03cfa338de55.mp4
+
+
+## Description 
+Our app, Marine Way, is a cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water. 
+
+Frequently, people lose items near, or in, bodies of water. This product seeks to provide an avenue for these people to be reunited with their lost items, and incentivize others to help find the lost items.
+Users will be able to make posts about items they have lost, including details about the item, where it was lost, contact info, and an optional bounty for finding the item.
+
+Users will also be able to make posts about items they have found, including their contact info and item description, so that the item's owner can reclaim the item, and optionally provide a reward.
+
+## Key Features
+- Login and authentication
+    - A user can signup to the application and create a profile. 
+    - This allows each user to associate themselves with their profile and make posts using their contact information, that can be modified later, and securely.
+- Listing creation
+  - A user can post a new listing of either a lost or found item.
+  - Each listing contains details about the item that can be used to identify the item and reunite it with the owner.
+  - Listings have a location for where the item was lost/found
+- Listing view
+  - Listings can be viewed without filtering to see all lost/found items
+  - Listings can be searched/filtered based on:
+    - location proximity to the user
+    - keywords in the title or description
+- Profile customization
+  - each user can customize their profile
+  - a user can add:
+    - contact info (phone number/email)
+    - a biography to establish trust 
+
+## Instructions
+ * Clear instructions for how to use the application from the end-user's perspective
+ * How do you access it? Are accounts pre-created or does a user register? Where do you start? etc. 
+ * Provide clear steps for using each feature described above
+ * This section is critical to testing your application and must be done carefully and thoughtfully
+ 
+## Development requirements
 The backend server is a NodeJS REST API that is installed separately from the frontend app. 
 ### Backend requirements 
  - Ubuntu 18.04 +
@@ -91,3 +126,23 @@ Before code is merged into `main`, we move it into a "release branch" which cont
 The purpose of this branch is to allow development to continue on `staging` without affecting the creation of the new release.  
 
 On each pull-request into `main` we require **2** reviews from the backend pod, and for the tests to pass on the CI. This *should* guarantee that any code that goes into production has been reviewed by at least **3** (including the author) and any changes don't fail the tests.  
+
+### Frontend Workflow
+We use github issues for Stories. These are automatically assigned a new issue ID by github.  
+
+When creating a new branch for an issue, the name describes the issue being worked on:  `[description]`.
+> For example, either of   
+> `navigation-and-profile` or    
+> `post-creation`  
+> would be acceptable
+
+Our testing is done manually using Expo to emulate a real-world device.
+
+On each pull-request into `main`, we require 2 reviews from the other members of the front-end team. Additionally, a short description of the changes and pictures or screen recordings of new features are added with each pull-request to help reviewers understand where to navigate to look for changes. 
+
+This should ensure that any code that goes into production has been reviewed by at least **3** people (including the author) .
+
+ ## Licenses  
+ The repo has no license.    
+ The lack of license means the code is not free. And we plan to keep the code closed-source.  
+ Our partner made this choice due to stakeholder concerns of having the platform be open-source.  
