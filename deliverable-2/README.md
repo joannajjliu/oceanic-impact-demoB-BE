@@ -19,7 +19,7 @@ Users will also be able to make posts about items they have found, including the
     - A user can signup to the application and create a profile. 
     - This allows each user to associate themselves with their profile and make posts using their contact information, that can be modified later, and securely.
 - Listing creation
-  - A user can post a new listing of either a lost of found item.
+  - A user can post a new listing of either a lost or found item.
   - Each listing contains details about the item that can be used to identify the item and reunite it with the owner.
   - Listings have a location for where the item was lost/found
 - Listing view
