@@ -26,7 +26,7 @@ before(async function () {
 
 async function beforeEachSuite() {
   await mongoose.connection.collection("users").deleteMany({}); // clear the users collection
-};
+}
 
 after(async function () {
   await disconnectDatabase();
@@ -43,8 +43,8 @@ async function createTestUser(): Promise<HydratedDocument<IUser>> {
       token: {
         value: "test",
         expiresAt: new Date(),
-      }
-    }
+      },
+    },
   });
 
   return await user.save(); // run pre-save hook
@@ -76,7 +76,9 @@ describe("get all users", async function () {
     expect(all_users.type).to.equal("application/json");
     expect(all_users.body.users).to.be.an("array");
     expect(all_users.body.users[0]).to.be.an("object");
-    expect(all_users.body.users[0]).to.not.have.property("emailVerificationInfo");
+    expect(all_users.body.users[0]).to.not.have.property(
+      "emailVerificationInfo"
+    );
   });
 
   it("should return a 200 and an array of users", async function () {
@@ -256,18 +258,17 @@ describe("create user", function () {
   this.timeout(2000);
   let app_: App;
 
-  beforeEach(async function() {
+  beforeEach(async function () {
     await beforeEachSuite();
     app_ = new App();
   });
 
   it("should return a 201 and the created user", async function () {
-    const user = await request(app_.app)
-      .post("/api/v0/auth").send({
-        email: "test@example.com",
-        password: "test",
-      });
-    
+    const user = await request(app_.app).post("/api/v0/auth").send({
+      email: "test@example.com",
+      password: "test",
+    });
+
     expect(user.status).to.equal(201);
     expect(user.type).to.equal("application/json");
     expect(user.body.user).to.be.an("object");
@@ -280,16 +281,16 @@ describe("create user", function () {
   });
 
   it("should return a 409 for a user with an existing email", async function () {
-    const user = await request(app_.app)
-      .post("/api/v0/auth").send({
-        email: "test@example.com", // same email as above
-        password: "test",
-      });
+    const user = await request(app_.app).post("/api/v0/auth").send({
+      email: "test@example.com", // same email as above
+      password: "test",
+    });
 
     expect(user.status).to.equal(201);
-    
+
     const duplicateEmailUser = await request(app_.app)
-      .post("/api/v0/auth").send({
+      .post("/api/v0/auth")
+      .send({
         email: "test@example.com", // same email as above
         password: "test",
       });
@@ -297,9 +298,10 @@ describe("create user", function () {
     expect(duplicateEmailUser.status).to.equal(409); // user already exists
     expect(duplicateEmailUser.type).to.equal("application/json");
     expect(duplicateEmailUser.body.message).to.be.a("string");
-    expect(duplicateEmailUser.body.message).to.include("email").and.include("already");
+    expect(duplicateEmailUser.body.message)
+      .to.include("email")
+      .and.include("already");
   });
-
 
   it("should return a 400 if email is missing", async function () {
     const response = await request(app_.app).post("/api/v0/auth").send({
@@ -324,43 +326,49 @@ describe("create user", function () {
   });
 
   it("should not login before email is verified", async function () {
-    const user = await request(app_.app)
-      .post("/api/v0/auth").send({
-        email: "test@example.com", // same email as above
-        password: "test",
-      });
+    const user = await request(app_.app).post("/api/v0/auth").send({
+      email: "test@example.com", // same email as above
+      password: "test",
+    });
 
     expect(user.status).to.equal(201);
-    
+
     const login = await request(app_.app).post("/api/v0/auth/login").send({
       username: "test@example.com", // username is the email
       password: "test",
     });
 
     expect(login.status).to.equal(302); // redirect on failure
-    expect(login.header).to.have.property("location", process.env.AUTH_FAILURE_REDIRECT); // failed to login
+    expect(login.header).to.have.property(
+      "location",
+      process.env.AUTH_FAILURE_REDIRECT
+    ); // failed to login
   });
 
   it("should be able to login after email is verified", async function () {
-    const user = await request(app_.app)
-      .post("/api/v0/auth").send({
-        email: "test@example.com", // same email as above
-        password: "test",
-      });
+    const user = await request(app_.app).post("/api/v0/auth").send({
+      email: "test@example.com", // same email as above
+      password: "test",
+    });
 
     expect(user.status).to.equal(201);
 
     // verify email with token
-    const verify = await request(app_.app).get("/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"); // all tokens are valid for testing
+    const verify = await request(app_.app).get(
+      "/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"
+    ); // all tokens are valid for testing
     expect(verify.status).to.equal(204); // success
-    
+
     const login = await request(app_.app).post("/api/v0/auth/login").send({
       username: "test@example.com", // username is the email
       password: "test",
     });
 
     expect(login.status).to.equal(302); // redirect on success
-    expect(login.header).to.have.property("location", process.env.AUTH_SUCCESS_REDIRECT); // successful login
+    expect(login.header).to.have.property(
+      "location",
+      process.env.AUTH_SUCCESS_REDIRECT
+    ); // successful login
   });
 });
 
@@ -382,7 +390,9 @@ describe("profile create on signup", async function () {
     });
 
     // verify email with token
-    const verify = await request(app_.app).get("/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"); // all tokens are valid for testing
+    const verify = await request(app_.app).get(
+      "/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"
+    ); // all tokens are valid for testing
     expect(verify.status).to.equal(204); // success
 
     await agent.post("/api/v0/auth/login").send({
@@ -401,7 +411,7 @@ describe("profile create on signup", async function () {
     expect(profile.status).to.equal(200);
     expect(profile.type).to.equal("application/json");
     expect(profile.body.profile).to.be.an("object");
-    expect(profile.body.profile).to.have.property("user", user.body.user._id)
+    expect(profile.body.profile).to.have.property("user", user.body.user._id);
   });
 });
 
@@ -426,9 +436,204 @@ describe("get profile details", async function () {
   });
 
   it("should be able to get a profile by its id", async function () {
-    const profile = await request(app_.app).get(`/api/v0/profile/${testProfile._id}`);
+    const profile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
 
     expect(profile.status).to.equal(200);
     expect(profile.type).to.equal("application/json");
+  });
+});
+
+describe("edit profile details", async function () {
+  this.timeout(2000);
+  let app_: App;
+
+  let testProfile: mongoose.HydratedDocument<IProfile>;
+
+  before(async function () {
+    await beforeEachSuite();
+    app_ = new App();
+
+    const testUser = await createTestUser();
+
+    // create test profile
+    const Profile = mongoose.model<IProfile>("Profile");
+    testProfile = await Profile.create({
+      user: testUser,
+      displayName: "test",
+    });
+
+    // verify email with token
+    const verify = await request(app_.app).get(
+      "/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"
+    ); // all tokens are valid for testing
+    expect(verify.status).to.equal(204); // success
+  });
+
+  it("should be able to edit modifiable fields", async function () {
+    const agent = request.agent(app_.app);
+
+    await agent.post("/api/v0/auth/login").send({
+      username: "test@example.com", // username is the email
+      password: "test",
+    });
+
+    const profile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
+
+    expect(profile.status).to.equal(200);
+    expect(profile.type).to.equal("application/json");
+    expect(profile.body.profile).to.have.property("displayName", "test");
+
+    await agent.patch("/api/v0/profile").send({
+      values: { bio: "Aryan is testing", displayName: "aryantest" },
+    });
+
+    const updatedProfile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
+
+    expect(updatedProfile.status).to.equal(200);
+    expect(updatedProfile.type).to.equal("application/json");
+    expect(updatedProfile.body.profile).to.have.property(
+      "displayName",
+      "aryantest"
+    );
+    expect(updatedProfile.body.profile).to.have.property(
+      "bio",
+      "Aryan is testing"
+    );
+  });
+});
+
+describe("edit profile details", async function () {
+  this.timeout(2000);
+  let app_: App;
+
+  let testProfile: mongoose.HydratedDocument<IProfile>;
+
+  before(async function () {
+    await beforeEachSuite();
+    app_ = new App();
+
+    const testUser = await createTestUser();
+
+    // create test profile
+    const Profile = mongoose.model<IProfile>("Profile");
+    testProfile = await Profile.create({
+      user: testUser,
+      displayName: "test",
+    });
+
+    // verify email with token
+    const verify = await request(app_.app).get(
+      "/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"
+    ); // all tokens are valid for testing
+    expect(verify.status).to.equal(204); // success
+  });
+
+  it("should not be able to edit unmodifiable fields", async function () {
+    const agent = request.agent(app_.app);
+
+    await agent.post("/api/v0/auth/login").send({
+      username: "test@example.com", // username is the email
+      password: "test",
+    });
+
+    const profile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
+
+    const user = profile.body.profile.user;
+
+    expect(profile.status).to.equal(200);
+    expect(profile.type).to.equal("application/json");
+    expect(profile.body.profile).to.have.property("user", user);
+
+    await agent.patch("/api/v0/profile").send({
+      values: { user: "213213" },
+    });
+
+    const updatedProfile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
+
+    expect(updatedProfile.status).to.equal(200);
+    expect(updatedProfile.type).to.equal("application/json");
+    expect(updatedProfile.body.profile).to.have.property("user", user); //profile user should remain the same
+  });
+});
+
+describe("edit profile details", async function () {
+  this.timeout(2000);
+  let app_: App;
+
+  let testProfile: mongoose.HydratedDocument<IProfile>;
+
+  before(async function () {
+    await beforeEachSuite();
+    app_ = new App();
+
+    const testUser = await createTestUser();
+
+    // create test profile
+    const Profile = mongoose.model<IProfile>("Profile");
+    testProfile = await Profile.create({
+      user: testUser,
+      displayName: "test",
+    });
+
+    // verify email with token
+    const verify = await request(app_.app).get(
+      "/api/v0/auth/verify?email=test@example.com&token=faketokendoesntmatter"
+    ); // all tokens are valid for testing
+    expect(verify.status).to.equal(204); // success
+  });
+
+  it("should only be able to edit modifiable fields", async function () {
+    const agent = request.agent(app_.app);
+
+    await agent.post("/api/v0/auth/login").send({
+      username: "test@example.com", // username is the email
+      password: "test",
+    });
+
+    const profile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
+
+    const user = profile.body.profile.user;
+
+    expect(profile.status).to.equal(200);
+    expect(profile.type).to.equal("application/json");
+    expect(profile.body.profile).to.have.property("user", user);
+    expect(profile.body.profile).to.have.property("displayName", "test");
+    expect(profile.body.profile).to.not.haveOwnProperty("bio");
+
+    await agent.patch("/api/v0/profile").send({
+      values: {
+        user: "213213",
+        bio: "Aryan is testing",
+        displayName: "aryantest",
+      },
+    });
+
+    const updatedProfile = await request(app_.app).get(
+      `/api/v0/profile/${testProfile._id}`
+    );
+
+    expect(updatedProfile.status).to.equal(200);
+    expect(updatedProfile.type).to.equal("application/json");
+    expect(updatedProfile.body.profile).to.have.property("user", user); //profile user should remain the same
+    expect(updatedProfile.body.profile).to.have.property(
+      "displayName",
+      "aryantest"
+    );
+    expect(updatedProfile.body.profile).to.have.property(
+      "bio",
+      "Aryan is testing"
+    );
   });
 });
