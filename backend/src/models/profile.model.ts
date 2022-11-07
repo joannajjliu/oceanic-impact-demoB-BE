@@ -1,32 +1,37 @@
 import mongoose, { Schema, model } from "mongoose";
+import { IImage } from "./image.model";
 import { IUser } from "./users.model";
 
 export interface IProfile {
-    user: IUser;
-    bio: string;
-    displayName: string;
-    createdAt: Date;
-    updatedAt: Date;
+  user: IUser;
+  avatarImage: IImage;
+  bio: string;
+  displayName: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const profileSchema = new mongoose.Schema({
+const profileSchema = new mongoose.Schema(
+  {
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     avatarImage: {
-        type: Schema.Types.ObjectId,
-        ref: "Image",
+      type: Schema.Types.ObjectId,
+      ref: "Image",
     },
     bio: {
-        type: String,
+      type: String,
     },
     displayName: {
-        type: String,
+      type: String,
     },
-}, {
+  },
+  {
     timestamps: true,
-});
+  }
+);
 
 const Profile = model<IProfile>("Profile", profileSchema);
 

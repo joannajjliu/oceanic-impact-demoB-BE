@@ -32,15 +32,19 @@ export default class EmailService {
   ): Promise<boolean> {
     const verification_url = `${process.env.ROOT_URL || "http://localhost:3000"}/api/v0/auth/verify?token=${token}&email=${email}`;
     try {
-        const account = process.env.EMAIL_PASS ? {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        } : await nodemailer.createTestAccount(); // create a test account if no email credentials are provided
-
+      let account
+        if (process.env.NODE_ENV !== "testing") {
+          account = process.env.EMAIL_PASS ? {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASS,
+          } : await nodemailer.createTestAccount(); // create a test account if no email credentials are provided
+        } else {
+          account = {}
+        }
         
         const transporter = await this.getTransporter(account);
 
-        const verfiyEmailHTML = fs.readFileSync(path.join(__dirname, "../emails/verifyEmail.html"), "utf8"); // read the html file
+        const verfiyEmailHTML = await fs.promises.readFile(path.join(__dirname, "../emails/verifyEmail.html"), "utf8"); // read the html file
         
         // send mail with defined transport object
         let info = await transporter.sendMail({
