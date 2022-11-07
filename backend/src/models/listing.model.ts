@@ -1,21 +1,21 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-import { Types, Schema } from 'mongoose';
+import { Types, Schema, CallbackError } from 'mongoose';
 
 
 interface ILocation {
     latitude: Types.Decimal128;
     longitude: Types.Decimal128;
-    name: string;
+    name?: string;
 }
 
 const locationSchema = new Schema<ILocation>({
     latitude: {
-        type: mongoose.Decimal128,
+        type: mongoose.Types.Decimal128,
         required: true
     }, 
     longitude: {
-        type: mongoose.Decimal128,
+        type: mongoose.Types.Decimal128,
         required: true
     }, 
     name: {
@@ -24,7 +24,7 @@ const locationSchema = new Schema<ILocation>({
 });
 
 
-interface IListing {
+export interface IListing {
     title: string;
     description: string;
     location: ILocation;
@@ -33,9 +33,9 @@ interface IListing {
     date?: Date;
     bounty?: Number;
     tags?: [string];
-    imageURL?: string;
+    imageIDs?: [string];
     resolved: Boolean;
-}
+};
 
 const listingSchema = new Schema<IListing>({
     title: {
@@ -71,8 +71,9 @@ const listingSchema = new Schema<IListing>({
     tags: {
         type: [String]
     }, 
-    imageURL: {
-        type: String
+    imageIDs: {
+        ref: 'Image', 
+        type: Schema.Types.ObjectId
     }, 
     resolved: {
         type: Boolean, 
@@ -80,6 +81,11 @@ const listingSchema = new Schema<IListing>({
     }
 }, {collection:'Listings'});
 
+listingSchema.statics.findWithFilter = async (filter) => {
+    let listings = Listing.find(filter);
+    return listings;
+}
+
 const Listing = mongoose.model('Listing', listingSchema);
 
-module.exports = Listing;
+export default Listing;
