@@ -42,11 +42,13 @@ Users will also be able to make posts about items they have found, including the
 ## Development requirements
 The backend server is a NodeJS REST API that is installed separately from the frontend app. 
 ### Backend requirements 
+ - Expo app on a mobile device
  - Ubuntu 18.04 +
  - nvm (node version manager)
  - nodejs v16
  - yarn
 #### Install backend dependencies
+    
  [Install nvm](https://github.com/nvm-sh/nvm#installing-and-updating)   
 
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash  
@@ -67,6 +69,7 @@ Install backend node dependencies
 
     cd backend_repo/backend && yarn install
 
+
 ### Running the development server
 First you need a mongoDB instance. You can either use a managed instance as from [mongo atlas](https://www.mongodb.com/atlas/database) or install yourself [locally](https://www.mongodb.com/).  
 
@@ -82,12 +85,6 @@ This will start the backend server on port `3000` so you can access it using `ht
  ## Deployment and Github Workflow
 
 Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
-
- * Be concise, yet precise. For example, "we use pull-requests" is not a precise statement since it leaves too many open questions - Pull-requests from where to where? Who reviews the pull-requests? Who is responsible for merging them? etc.
- * If applicable, specify any naming conventions or standards you decide to adopt.
- * Describe your overall deployment process from writing code to viewing a live applicatioon
- * What deployment tool(s) are you using and how
- * Don't forget to **briefly explain why** you chose this workflow or particular aspects of it!
 
 ### Backend Workflow
 #### Backend Deployment
@@ -127,21 +124,40 @@ The purpose of this branch is to allow development to continue on `staging` with
 
 On each pull-request into `main` we require **2** reviews from the backend pod, and for the tests to pass on the CI. This *should* guarantee that any code that goes into production has been reviewed by at least **3** (including the author) and any changes don't fail the tests.  
 
-### Frontend Workflow
-We use github issues for Stories. These are automatically assigned a new issue ID by github.  
+### Frontend requirements 
+ - Ubuntu 18.04 +
+ - nodejs v16
+ - expo mobile app
+#### Install Frontend dependencies
 
-When creating a new branch for an issue, the name describes the issue being worked on:  `[description]`.
-> For example, either of   
-> `navigation-and-profile` or    
-> `post-creation`  
-> would be acceptable
-
-Our testing is done manually using Expo to emulate a real-world device.
-
-On each pull-request into `main`, we require 2 reviews from the other members of the front-end team. Additionally, a short description of the changes and pictures or screen recordings of new features are added with each pull-request to help reviewers understand where to navigate to look for changes. 
-
-This should ensure that any code that goes into production has been reviewed by at least **3** people (including the author) .
-
+  Firstly, install the [Expo Mobile App](https://expo.dev/client) on your mobile device.
+ Secondly, install the [Expo dependencies](https://docs.expo.dev/get-started/installation/#requirements) on your computer.
+ 
+ Coming to the repository on your machine. You should get into the folder "./frontend" and clone our frontend repository by running the command
+    
+    git clone https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-front-end.git
+    
+ Following that, navigate inside the newly cloned repository and install the dependencies
+    
+    npm install
+    
+ To run the app, run
+ 
+    npm start
+    
+ You will be given a QR code on your terminal which you can scan and run the app (the app has to be connected to the same internet as your system). Scan the code and the app should start.
+ 
+ ### Navigation/Basic Usage
+ 
+ - Upon running the app, the user is greeted with a login screen which can also help the user to signup if he/she doesn't have an account.
+ - After logging in, the homepage comes which forms the main door to all the features of the app.
+ - On the home page, the user can see postings of lost items and similar notifications if they are found. The postings are based on the location of the user. The location can be changed as per the liking of the user. The actual funcationality is yet to be implemented.
+ - To further refine search of postings, there is a button on the home screen to set filters (Even this feature has just the structure and will be implemented in the future).
+ - Clicking on each item will take the user to a separate page which has complete information about the respective item. The information will include an enlarged photo, description ,and contact information of the publisher.
+ - Coming back to the home screen, the user can create their own post by pressing the "+post" button at the bottom.
+ - Creating a new post will take the user to another page where he/she can enter all the information about the post.
+ - Again coming back to the home screen, the user can click on the "User" button at the bottom to get their information. This will take the user to another page where they can view their photo and postings.
+ 
  ## Licenses  
  The repo has no license.    
  The lack of license means the code is not free. And we plan to keep the code closed-source.  
