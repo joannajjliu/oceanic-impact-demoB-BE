@@ -1,49 +1,161 @@
 # Marine Way/Smart Solutions Inc - Team 12
+[Frontend D2](https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-front-end/releases/tag/D2)
 
-## Iteration 02 - Review & Retrospect
+## Demo 
 
- * When: Sun Nov 6, 2022
- * Where: ONLINE - Zoom
-
-## Process - Reflection
+https://user-images.githubusercontent.com/82978761/200195862-fdf49f8f-3619-49dc-ae9b-03cfa338de55.mp4
 
 
-#### Decisions that turned out well
+## Description 
+Our app, Marine Way, is a cross-platform mobile app that allows users to upload images and text metadata pertaining to items found/lost near or in bodies of water. 
 
-- The decision to split into pods (front-end/back-end) for meetings and organization
-  - This decision made meeting-scheduling much simpler, since fewer individual availabilities needed to be considered for each meeting. This division of labour has made the project simpler to manage, and the tasks easier to break down.
-- The decision to encourage pair programming
-  - Especially in this course, where experience levels vary significantly, pair programming has allowed our team to share stack knowledge with one another and resolve blockers quickly.
-- The decision to have two repos, one for frontend for backend
-  - By splitting up the repos for each respective team, each team was able to have good version control of their changes for their tasks without affecting or getting affected by the other team’s progress. 
-- The decision to produce two unrelated iterations of the prototype
-  - Two of the front-end engineers on our team independently produced UI prototypes to ensure a high diversity of ideas. Then we were able to request feedback from our partner on each of the prototypes, leading to the best version of each screen / element making it into the final layout.
+Frequently, people lose items near, or in, bodies of water. This product seeks to provide an avenue for these people to be reunited with their lost items, and incentivize others to help find the lost items.
+Users will be able to make posts about items they have lost, including details about the item, where it was lost, contact info, and an optional bounty for finding the item.
 
-#### Decisions that did not turn out as well as we hoped
+Users will also be able to make posts about items they have found, including their contact info and item description, so that the item's owner can reclaim the item, and optionally provide a reward.
 
-- The decision to not have retrospective meetings
-  - This wasn’t so much a conscious decision, rather something that got left out. As a result of this, we haven’t had an appropriate, recurring place to discuss successes and failures of our ongoing collaboration process.
-- The decision to create only low-fidelity prototypes with a pen and paper.
-  - This decision was made in the interest of time, but it has resulted in difficult coordination between front-end tasks, specifically pertaining to consistency in color-selection and other stylistic choices.
-- Not setting up a Swagger Instance for sharing backend REST API documentation with the front-end team.
-  - This lead to extra work scheduling and blocking unnecessarily between pods, where some good Swagger docs would make this much more seamless.
+## Key Features
+- Login and authentication
+    - A user can signup to the application and create a profile. 
+    - This allows each user to associate themselves with their profile and make posts using their contact information, that can be modified later, and securely.
+- Listing creation
+  - A user can post a new listing of either a lost or found item.
+  - Each listing contains details about the item that can be used to identify the item and reunite it with the owner.
+  - Listings have a location for where the item was lost/found
+- Listing view
+  - Listings can be viewed without filtering to see all lost/found items
+  - Listings can be searched/filtered based on:
+    - location proximity to the user
+    - keywords in the title or description
+- Profile customization
+  - each user can customize their profile
+  - a user can add:
+    - contact info (phone number/email)
+    - a biography to establish trust 
+
+## Instructions
+- Upon running the app, the user is greeted with a login screen. The login screen is not connected with the database but the user can proceed by simply pressing 'login'.
+ - After logging in, the homepage comes which forms the main door to all the features of the app.
+ - On the home page, the user can see postings of lost items and similar notifications if they are found. These are dummy posting for now.
+ - Clicking on each item will take the user to a separate page which has complete information about the respective item. The information will include an enlarged photo, description ,and contact information of the publisher.
+ - Coming back to the home screen, the user can create their own post by pressing the "+post" button at the bottom.
+ - Creating a new post will take the user to another page where they can enter all the information about the post.
+ - Again coming back to the home screen, the user can click on the "User" button at the bottom to get their information. This will take the user to another page where they can view their photo and postings (dummy postings).
+ 
+## Development requirements
+The backend server is a NodeJS REST API that is installed separately from the frontend app. 
+### Backend requirements 
+ - Expo app on a mobile device
+ - Ubuntu 18.04 +
+ - nvm (node version manager)
+ - nodejs v16
+ - yarn
+#### Install backend dependencies
+    
+ [Install nvm](https://github.com/nvm-sh/nvm#installing-and-updating)   
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash  
+
+Install node v16   
+
+    nvm install 16
+
+Install yarn  
+
+    npm install -g yarn
+
+Clone the backend repo to `backend_repo`
+
+    git clone https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-inc-m.git backend_repo
+
+Install backend node dependencies  
+
+    cd backend_repo/backend && yarn install
 
 
-#### Planned changes
+### Running the development server
+First you need a mongoDB instance. You can either use a managed instance as from [mongo atlas](https://www.mongodb.com/atlas/database) or install yourself [locally](https://www.mongodb.com/).  
 
-- Create a SwaggerUI instance for the backend API documentation.
-  - This makes sharing the backend API between pods and integrating it with the frontend much easier.
-  - This also serves as a great form of documentation for future development.
-- A high-fidelity prototype wouldn’t necessarily be useful anymore since many major components of the UI are already constructed, so instead we will create a design document with standard color codes, text margins, and font styles for the front-end engineers to refer to when building out the rest of the UI.
+Open `backend/.env.development` and fill in the environment variables with the correct values.  
+You should only need to fill in `MONGO_URI` with the connection string for the mongo instance you are running.  
 
+Run the development server  
 
-## Product - Review
+    yarn run dev
 
-- We prepared the demo using an iOS emulator and mocked network requests.   
-- We were able to demo navigation and some dynamic UI.   
-- We demonstrated navigation between the log-in/signup screen, the home screen, the expanded listing screen, the profile screen, and the post-creation screen.   
-- The dynamic UI elements that we demoed include hiding the “edit” button on the profile screen when the profile being opened does not belong to the currently-logged in user, and displaying “Owner: ownerNameHere” or “Finder: finderNameHere” on the expanded listing view depending on if the listing is for a lost item or a found item.   
-- Our partner accepted the features but requested that the “Filter” button on the home screen, which is not yet implemented, be predominantly used for applying tag filters in order to refine the home screen listings by item type.  
-- From this demo, we learned that it would have been better to enforce a stricter deadline for the deliverable to be before the demo day. This would have improved the feedback we were able to get, along with allowing time for discussion of any features that we are having difficulty completing.  
+This will start the backend server on port `3000` so you can access it using `http://localhost:3000` from the same device.  
 
+### Frontend requirements 
+ - Ubuntu 18.04 +
+ - nodejs v16
+ - expo mobile app
+#### Install Frontend dependencies
 
+  Firstly, install the [Expo Mobile App](https://expo.dev/client) on your mobile device.
+ Secondly, install the [Expo dependencies](https://docs.expo.dev/get-started/installation/#requirements) on your computer.
+ 
+ 
+ ## Deployment and Github Workflow
+
+Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
+
+### Backend Workflow
+#### Backend Deployment
+The backend is manually deployed on a host server running Ubuntu 20.04.  
+The backend deployment steps are:
+1. Install dependencies (nvm/node/yarn)
+   a. Install pm2 `yarn add -g pm2`
+1. Verify port is open e.g. `ufw enable && ufw allow 80`
+1. git clone/pull current main branch
+1. `cd backend && yarn install` to install node dependencies
+1. Copy current `.env.production` file over to host server using `scp`
+1. build the project `yarn build`
+1. start under pm2 to restart on crash `pm2 start yarn --time -- run start`  
+
+#### Backend Git Workflow
+We use github issues for Stories. These automatically are assigned a new issue ID by github.  
+
+When creating a new branch for an issue, we use the branch naming convention of `[issue#]-[description]` which is automatically generated by the github issue if you go to `Development > Create a branch`, or using `GH-[issue#]-[description]`.  
+> For example, either of   
+> `23-a-user-can-use-the-api-to-edit-their-profile` or    
+> `GH-23-a-user-can-use-the-api-to-edit-their-profile`  
+> would be acceptable
+
+This helps when tracking development progress for an issue as github should automatically find most of these branches and any PRs created from them.   
+
+Each new branch for an issue is to be created off-of the `staging` branch. This is to separate code that is not ready for production release from code that is currently running in production (i.e. in `main`)    
+
+We require pull-requests for merging into `staging`, and also for merging into `main`.  This is to prevent bugs and bad-code introduced due to quick-hands.  
+
+On each pull-request into `staging` we require 1 review from someone in the backend pod, and for the tests to pass on the CI. This guarantees that code is reviewed before it enters the common `staging` branch and that any tests are not failing due to the changes. 
+
+Our CI is run using Github Actions and automatically runs our Mocha test suite and shows as a check on each PR into `staging` or `main`.  
+
+Before code is merged into `main`, we move it into a "release branch" which contains all the code thus far, and should contain any commits that we are ready to release.  This branch is reviewed before release, and any bug fixes can be made directly to it, instead of to staging, before release is made to `main`. The naming for these branches is `release/v#.#.#`.  
+
+The purpose of this branch is to allow development to continue on `staging` without affecting the creation of the new release.  
+
+On each pull-request into `main` we require **2** reviews from the backend pod, and for the tests to pass on the CI. This *should* guarantee that any code that goes into production has been reviewed by at least **3** (including the author) and any changes don't fail the tests.  
+
+### Frontend Deployment
+
+#### Frontend Workflow
+ Coming to the repository on your machine. You should get into the folder "./frontend" and clone our frontend repository by running the command
+    
+    git clone https://github.com/csc301-fall-2022/team-project-12-oceanic-impact-front-end.git
+    
+ Following that, navigate inside the newly cloned repository and install the dependencies
+    
+    npm install
+    
+ To run the app, run
+ 
+    npm start
+    
+ You will be given a QR code on your terminal which you can scan and run the app (the app has to be connected to the same internet as your system). Scan the code and the app should start.
+ 
+ 
+ ## Licenses  
+ The repo has no license.    
+ The lack of license means the code is not free. And we plan to keep the code closed-source.  
+ Our partner made this choice due to stakeholder concerns of having the platform be open-source.  
