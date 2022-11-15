@@ -35,9 +35,9 @@ Users will also be able to make posts about items they have found, including the
 
 ## Instructions
 - Upon running the app, the user is greeted with a login screen. The login screen is not connected with the database but the user can proceed by simply pressing 'login'.
- - After logging in, the homepage comes which forms the main door to all the features of the app.
- - On the home page, the user can see postings of lost items and similar notifications if they are found. These are dummy posting for now.
- - Clicking on each item will take the user to a separate page which has complete information about the respective item. The information will include an enlarged photo, description ,and contact information of the publisher.
+ - After logging in, comes the homepage which is the main page of the app.
+ - On the home page, the user can see postings of lost and found items. These are dummy posts for now.
+ - Clicking on each item will take the user to a separate page which has complete information about the respective item. The information will include an enlarged photo, description, and contact information of the publisher.
  - Coming back to the home screen, the user can create their own post by pressing the "+post" button at the bottom.
  - Creating a new post will take the user to another page where they can enter all the information about the post.
  - Again coming back to the home screen, the user can click on the "User" button at the bottom to get their information. This will take the user to another page where they can view their photo and postings (dummy postings).
@@ -96,8 +96,6 @@ This will start the backend server on port `3000` so you can access it using `ht
  
  
  ## Deployment and Github Workflow
-
-Describe your Git / GitHub workflow. Essentially, we want to understand how your team members shares a codebase, avoid conflicts and deploys the application.
 
 ### Backend Workflow
 #### Backend Deployment
