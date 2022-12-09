@@ -1,0 +1,1 @@
+web: NODE_ENV=production ts-node ./dist/server.js

@@ -3,7 +3,7 @@ run-name: Testing Backend on new PR
 on: # see here https://github.com/marketplace/actions/test-reporter
   pull_request:
     branches: ['main', 'staging'] # only on PRs to main or staging branches
-    paths: ['backend/**'] # only in the backend folder
+    paths: ['src/**', '*.json', '*.js', '*.ts'] # only in the backend folder
 
 jobs:
   build-test:
