@@ -56,16 +56,7 @@ Describe your Git / GitHub workflow. Essentially, we want to understand how your
 
 ### Backend Workflow
 #### Backend Deployment
-The backend is manually deployed on a host server running Ubuntu 20.04.  
-The backend deployment steps are:
-1. Install dependencies (nvm/node/yarn)
-   a. Install pm2 `yarn add -g pm2`
-1. Verify port is open e.g. `ufw enable && ufw allow 80`
-1. git clone/pull current main branch
-1. `cd backend && yarn install` to install node dependencies
-1. Copy current `.env.production` file over to host server using `scp`
-1. build the project `yarn build`
-1. start under pm2 to restart on crash `pm2 start yarn --time -- run start`  
+A Heroku remote has been created for the app, the `deploy` branch is set up with Heroku's automatic deployment. Every time a push is made to `deploy` branch, Heroku will automatically re-deploy as soon as the continuous integration tests pass.
 
 #### Backend Git Workflow
 We use github issues for Stories. These automatically are assigned a new issue ID by github.  
