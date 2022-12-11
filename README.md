@@ -30,7 +30,7 @@ Clone the backend repo to `backend_repo`
 
 Install backend node dependencies  
 
-    cd backend_repo/backend && yarn install
+    cd backend_repo/ && yarn install
 
 ### Running the development server
 First you need a mongoDB instance. You can either use a managed instance as from [mongo atlas](https://www.mongodb.com/atlas/database) or install yourself [locally](https://www.mongodb.com/).  
