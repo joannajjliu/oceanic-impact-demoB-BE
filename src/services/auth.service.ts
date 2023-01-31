@@ -32,11 +32,13 @@ export default class AuthService {
         const user: HydratedDocument<IUser> | null = await User.findOne({
             email: email,
         });
-
+        console.log("auth service user", user)
         if (!user) {
             return { success: false, message: "User not found" };
         } else {
             const isValid = await user.validatePassword(password);
+            console.log("auth service isValid", isValid)
+
             if (isValid) {
                 if (!user.emailVerificationInfo.isVerified) {
                     return { message: "Email is not yet verified.", success: false };
@@ -64,20 +66,21 @@ export default class AuthService {
             email,
             password,
             emailVerificationInfo: {
-                isVerified: false,
+                isVerified: true,
                 token: {
                     value: await this.generateNewToken(),
                     expiresAt: new Date(Date.now() + parseInt(process.env.EMAIL_TOKEN_AGE || "2160000")), // 6 hours default
                 },
             },
         });
+        console.log("signup newUser", newUser)
         const user = await newUser.save(); // calls the pre-save hook
         
         // create a profile for the user
         await this.profile_model.create({
             user: user._id,
             emailInfo: {
-                isVerified: false,
+                isVerified: true,
                 email: email,
             }
         });
